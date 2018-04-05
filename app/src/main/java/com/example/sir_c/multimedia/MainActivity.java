@@ -1,5 +1,6 @@
 package com.example.sir_c.multimedia;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,7 @@ import android.widget.VideoView;
 public class MainActivity extends AppCompatActivity {
 
     VideoView vvVideo;
-    ImageButton ibtnPlay, ibtnStop, ibtnPause;
+    ImageButton ibtnPlay, ibtnStop, ibtnPause, ibtnTube;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         ibtnPlay = (ImageButton)findViewById(R.id.ibtnPlay);
         ibtnPause = (ImageButton)findViewById(R.id.ibtnPause);
         ibtnStop = (ImageButton)findViewById(R.id.ibtnStop);
+        ibtnTube = (ImageButton)findViewById(R.id.ibtnTube);
 
         ibtnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +67,18 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Reanudando", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        ibtnTube.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String strURL = "https://www.youtube.com/watch?v=AoM86unBUIg";
+                Uri uri = Uri.parse(strURL);
+                uri = Uri.parse("vnd.youtube:" + uri.getQueryParameter("v"));
+
+                Intent iYouTube = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(iYouTube);
             }
         });
     }
